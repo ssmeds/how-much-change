@@ -3,16 +3,35 @@ let inputTotal = document.createElement("input");
 let inputPayed = document.createElement("input");
 let button = document.createElement("button");
 let display = document.createElement("div");
+let inputContainer = document.createElement('div')
+let inputTotalLabel = document.createElement('label')
+let inputPayedLabel = document.createElement('label')
 
+inputContainer.classList = 'input-container';
+display.classList = 'display-container'
+inputTotal.classList = 'input-total'
+inputPayed.classList = 'input-payed'
+inputTotal.id = 'input-total'
+inputPayed.id = 'input-payed'
+inputTotalLabel.htmlFor = 'input-total'
+inputPayedLabel.htmlFor = 'input-payed'
+inputTotalLabel.textContent = 'Summa du är skyldig'
+inputPayedLabel.textContent = 'Summa du ger till kassör'
 // Appending elements to body
-document.body.appendChild(inputTotal);
-document.body.appendChild(inputPayed);
-document.body.appendChild(button);
+document.body.appendChild(inputContainer)
+inputContainer.appendChild(inputTotal);
+inputContainer.appendChild(inputPayed);
+inputContainer.appendChild(button);
+// inputTotal.appendChild(inputTotalLabel);
+// inputPayed.appendChild(inputPayedLabel);
 document.body.appendChild(display);
 
-inputTotal.placeholder = "Amount you owe";
-inputPayed.placeholder = "Amount you give cashier";
-button.textContent = "Calculate change";
+document.querySelector('.input-total').insertAdjacentElement('beforebegin', inputTotalLabel)
+document.querySelector('.input-payed').insertAdjacentElement('beforebegin', inputPayedLabel)
+
+inputTotal.placeholder = "kr";
+inputPayed.placeholder = "kr";
+button.textContent = "Räkna ut växel";
 
 // Eventlistener for input
 button.addEventListener("click", function (e) {
@@ -50,7 +69,7 @@ function howMuchChange(total, payed) {
 		if (value <= difference) {
 			// Add number of denominations to change object array
 			change[value] = Math.floor(difference / value);
-			console.log(difference/value);
+			console.log(difference / value);
 			// difference -= values[i] * change[value];
 
 			// Set difference to the new value of the remainder of difference%value
